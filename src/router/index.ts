@@ -20,6 +20,10 @@ const router = createRouter({
       path: '/cart',
       name: 'Cart',
       component: CartPage
+    },
+    {
+      path: '/',
+      redirect: '/products'
     }
   ]
 })
