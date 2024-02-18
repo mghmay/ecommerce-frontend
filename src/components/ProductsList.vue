@@ -1,24 +1,35 @@
 <template>
-  <div v-for="product in products" :key="product.id" class="product-container">
-    <ProductListItem :product="product" />
+  <div v-if="products.length > 0">
+    <div v-for="product in products" :key="product.id" class="product-container">
+      <ProductListItem
+        :product="product"
+        v-on:remove-from-cart="$emit('remove-from-cart', $event)"
+      />
+    </div>
+  </div>
+  <div id="no-products-text" v-else>
+    <h4>{{ noProductsText ? noProductsText : 'Nothing to see here' }}</h4>
   </div>
 </template>
 <script>
 import ProductListItem from '@/components/ProductsListItem.vue'
 export default {
   name: 'ProductsList',
-  props: ['products'],
+  props: ['products', 'noProductsText'],
   components: {
     ProductListItem
   }
 }
 </script>
-<style>
+<style scoped>
 .product-container {
   align-content: 'center';
   border-bottom: 1px solid #ddd;
   display: flex;
   padding: 16px;
   width: 100%;
+}
+#no-products-text {
+  text-align: center;
 }
 </style>

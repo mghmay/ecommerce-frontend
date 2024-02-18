@@ -7,7 +7,10 @@
       <h1>{{ product.name }}</h1>
       <h3 id="price">${{ product.price }}</h3>
       <p>Average rating: {{ product.averageRating }}</p>
-      <button id="add-to-cart">Add to cart</button>
+      <button id="add-to-cart" v-on:click="addToCart" v-if="!showSuccessMessage">
+        Add to cart
+      </button>
+      <button id="add-to-cart" class="green-button" v-else>Successfully added to cart</button>
       <h4>Description</h4>
       <p>{{ product.description }}</p>
     </div>
@@ -15,16 +18,30 @@
   <NotFoundPage v-else />
 </template>
 <script>
-import { products } from '@/fake-data'
+import axios from 'axios'
 import NotFoundPage from './NotFoundPage.vue'
 export default {
   name: 'ProductDetailPage',
   data() {
     return {
-      product: products.find((p) => p.id === this.$route.params.id)
+      product: {},
+      showSuccessMessage: false
     }
   },
-  components: { NotFoundPage }
+  methods: {
+    async addToCart() {
+      await axios.post('/api/users/12345/cart', { productId: this.$route.params.id })
+      this.showSuccessMessage = true
+      setTimeout(() => this.$router.push('/products'), 1500)
+    }
+  },
+  components: { NotFoundPage },
+  async created() {
+    const result = await axios.get(`/api/products/${this.$route.params.id}`)
+    const product = result.data
+    console.log(product)
+    this.product = product
+  }
 }
 </script>
 
@@ -56,5 +73,8 @@ img {
   position: absolute;
   top: 24px;
   right: 16px;
+}
+.green-button {
+  background-color: green;
 }
 </style>

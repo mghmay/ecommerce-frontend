@@ -5,6 +5,9 @@
       <h3>{{ product.name }}</h3>
       <p>{{ product.price }}</p>
     </div>
+    <button class="remove-button" @click="$emit('remove-from-cart', product.id)">
+      Remove From Cart
+    </button>
   </div>
 </template>
 <script>
@@ -13,7 +16,7 @@ export default {
   props: ['product']
 }
 </script>
-<style>
+<style scoped>
 .product-container {
   align-content: 'center';
   border-bottom: 1px solid #ddd;
