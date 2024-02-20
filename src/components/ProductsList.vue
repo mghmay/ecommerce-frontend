@@ -1,9 +1,11 @@
 <template>
   <div v-if="products.length > 0">
-    <div v-for="product in products" :key="product.id" class="product-container">
+    <div v-for="item in products" :key="item.product.id" class="product-container">
       <ProductListItem
-        :product="product"
+        :product="item.product"
+        :amount="item.amount"
         v-on:remove-from-cart="$emit('remove-from-cart', $event)"
+        v-on:add-to-cart="$emit('add-to-cart', $event)"
       />
     </div>
   </div>

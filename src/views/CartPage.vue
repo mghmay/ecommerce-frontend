@@ -4,6 +4,7 @@
     <ProductsList
       :products="cartItems"
       v-on:remove-from-cart="removeFromCart($event)"
+      v-on:add-to-cart="addToCart($event)"
       noProductsText="You haven't added any items to your cart yet"
     />
     <h3 id="total-price">Total: ${{ totalPrice }}</h3>
@@ -22,13 +23,16 @@ export default {
   },
   computed: {
     totalPrice() {
-      return this.cartItems.reduce((sum, item) => sum + Number(item.price), 0)
+      return this.cartItems.reduce((sum, item) => sum + Number(item.product.price) * item.amount, 0)
     }
   },
   methods: {
     async removeFromCart(productId) {
-      console.log(productId)
       const result = await axios.delete(`/api/users/12345/cart/${productId}`)
+      this.cartItems = result.data
+    },
+    async addToCart(productId) {
+      const result = await axios.post(`/api/users/12345/cart`, { productId })
       this.cartItems = result.data
     }
   },

@@ -32,7 +32,7 @@ export default {
     async addToCart() {
       await axios.post('/api/users/12345/cart', { productId: this.$route.params.id })
       this.showSuccessMessage = true
-      setTimeout(() => this.$router.push('/products'), 1500)
+      setTimeout(() => (this.showSuccessMessage = false), 1000)
     }
   },
   components: { NotFoundPage },
