@@ -47,9 +47,14 @@ export default {
 
 <style scoped>
 #page-wrap {
+  background-color: var(--medium-blue);
   margin-top: 16px;
   padding: 16px;
   max-width: 600px;
+}
+
+#page-wrap *:not(button) {
+  background-color: inherit;
 }
 
 #img-wrap {
@@ -57,7 +62,7 @@ export default {
 }
 
 img {
-  width: 400px;
+  width: 250px;
 }
 
 #product-details {

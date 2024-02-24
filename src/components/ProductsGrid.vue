@@ -15,7 +15,7 @@ export default {
 .grid-wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 16px;
 }
 </style>

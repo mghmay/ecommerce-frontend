@@ -1,7 +1,7 @@
 <template>
   <nav id="nav-bar">
     <router-link to="/products" id="products-link">
-      <h1>FABULOUS FOOTWEAR</h1>
+      <h1>Foobar Bookshop</h1>
     </router-link>
     <router-link to="/cart" id="cart-link">
       <button>Shopping Cart</button>
@@ -15,9 +15,13 @@ export default {
 </script>
 <style scoped>
 #nav-bar {
-  border-bottom: 1px solid #ddd;
   height: 75px;
   width: 100%;
+  background-color: var(--medium-blue);
+}
+
+#nav-bar *:not(button) {
+  background-color: inherit;
 }
 
 #products-link {

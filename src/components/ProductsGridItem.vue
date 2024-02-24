@@ -1,10 +1,11 @@
 <template>
-  <div class="product-item">
-    <img :src="product.imageUrl" />
-    <h3>{{ product.name }}</h3>
-    <p class="product-price">${{ product.price }}</p>
-    <router-link :to="`/products/${product.id}`">
-      <button>View Details</button>
+  <div class="grid-item">
+    <router-link class="link" :to="`/products/${product.id}`">
+      <div class="product">
+        <img :src="product.imageUrl" />
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">${{ product.price }}</p>
+      </div>
     </router-link>
   </div>
 </template>
@@ -15,24 +16,42 @@ export default {
 }
 </script>
 <style scoped>
-.product-item {
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px #888;
+.grid-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2%;
-  padding: 20px;
+  margin: 2%;
   position: relative;
-  width: 32%;
+  width: 24%;
+}
+
+.product {
+  background-color: var(--light-blue);
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0px 2px 5px #888;
+}
+
+.product:hover {
+  transform: scale(1.1);
+  background-color: var(--medium-blue);
 }
 
 .product-name {
+  background-color: inherit;
+  margin-bottom: 0;
+}
+.product-price {
+  background-color: inherit;
   margin-bottom: 0;
 }
 
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
 img {
-  height: 200px;
+  height: 300px;
   width: 200px;
 }
 
