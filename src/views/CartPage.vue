@@ -9,7 +9,7 @@
         :products="cartItems"
         v-on:remove-from-cart="removeFromCart($event)"
         v-on:add-to-cart="addToCart($event)"
-        noProductsText="You haven't added any items to your cart yet"
+        nobooksText="You haven't added any items to your cart yet"
       />
       <h3 id="total-price">Total: ${{ totalPrice }}</h3>
       <button id="checkout-button">Proceed to Checkout</button>
@@ -20,6 +20,13 @@
 import axios from "axios";
 import ProductsList from "@/components/ProductsList.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
+
+const updateCart = (result) => {
+  return result.data.map(({ book: product, amount }) => ({
+    product,
+    amount,
+  }));
+};
 export default {
   name: "CartPage",
   data() {
@@ -36,23 +43,22 @@ export default {
     },
   },
   methods: {
-    async removeFromCart(productId) {
+    async removeFromCart(bookId) {
       this.loading = true;
-      const result = await axios.delete(`/api/users/12345/cart/${productId}`);
-      this.cartItems = result.data;
+      const result = await axios.delete(`/api/users/12345/cart/${bookId}`);
+      this.cartItems = updateCart(result);
       this.loading = false;
     },
-    async addToCart(productId) {
+    async addToCart(bookId) {
       this.loading = true;
-      const result = await axios.post(`/api/users/12345/cart`, { productId });
-      this.cartItems = result.data;
+      const result = await axios.post(`/api/users/12345/cart`, { bookId });
+      this.cartItems = updateCart(result);
       this.loading = false;
     },
   },
   async created() {
     const result = await axios.get("/api/users/12345/cart");
-    const cartItems = result.data;
-    this.cartItems = cartItems;
+    this.cartItems = updateCart(result);
     this.loading = false;
   },
   components: {

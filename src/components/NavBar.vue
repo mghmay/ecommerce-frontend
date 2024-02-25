@@ -1,6 +1,6 @@
 <template>
   <nav id="nav-bar">
-    <router-link to="/products" id="products-link">
+    <router-link to="/books" id="books-link">
       <h1>Foobar Bookshop</h1>
     </router-link>
     <router-link to="/cart" id="cart-link">
@@ -14,9 +14,6 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  color: var(--dark-blue);
-}
 #nav-bar {
   height: 75px;
   width: 100%;
@@ -27,7 +24,7 @@ h1 {
   background-color: inherit;
 }
 
-#products-link {
+#books-link {
   text-align: center;
   display: block;
   color: black;
@@ -38,7 +35,7 @@ h1 {
   text-decoration: none;
 }
 
-#products-link h1 {
+#books-link h1 {
   margin: 0;
 }
 

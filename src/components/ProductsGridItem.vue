@@ -1,9 +1,9 @@
 <template>
   <div class="grid-item">
-    <router-link class="link" :to="`/products/${product.id}`">
+    <router-link class="link" :to="`/books/${product.id}`">
       <div class="product">
         <img :src="product.imageUrl" />
-        <h3 class="product-name">{{ product.name }}</h3>
+        <h4 class="product-name">{{ product.name }}</h4>
         <p class="product-price">${{ product.price }}</p>
       </div>
     </router-link>
@@ -19,9 +19,8 @@ export default {
 .grid-item {
   display: flex;
   flex-direction: column;
-  margin: 2%;
-  position: relative;
-  width: 20%;
+  width: 100%;
+  padding: 15px 10px;
 }
 
 .product {
@@ -32,6 +31,7 @@ export default {
   align-items: center;
   box-shadow: 0px 2px 5px #888;
   height: 100%;
+  width: 100%;
 }
 
 .product:hover {
@@ -48,7 +48,6 @@ export default {
 }
 
 .link {
-  display: flex;
   text-decoration: none;
   color: inherit;
 }
@@ -60,10 +59,6 @@ img {
 
 a {
   height: 100%;
-  width: 100%;
-}
-
-button {
   width: 100%;
 }
 </style>

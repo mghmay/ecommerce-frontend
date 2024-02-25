@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CartPage from '@/views/CartPage.vue'
-import ProductDetailPage from '@/views/ProductDetailPage.vue'
-import ProductsPage from '@/views/ProductsPage.vue'
+import BookDetailPage from '@/views/BookDetailPage.vue'
+import BooksPage from '@/views/BooksPage.vue'
 import NotFoundPage from '@/views/NotFoundPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/products',
-      name: 'Products',
-      component: ProductsPage
+      path: '/books',
+      name: 'books',
+      component: BooksPage
     },
     {
-      path: '/products/:id',
-      name: 'ProductDetail',
-      component: ProductDetailPage
+      path: '/books/:id',
+      name: 'BookDetail',
+      component: BookDetailPage
     },
     {
       path: '/cart',
@@ -24,7 +24,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      redirect: '/products'
+      redirect: '/books'
     },
     {
       path: '/:pathMatch(.*)*',

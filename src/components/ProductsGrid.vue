@@ -13,10 +13,8 @@ export default {
 </script>
 <style scoped>
 .grid-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-top: 16px;
 }
 </style>

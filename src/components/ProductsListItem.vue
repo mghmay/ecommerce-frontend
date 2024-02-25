@@ -31,6 +31,7 @@ export default {
   display: flex;
   padding: 16px;
   width: 100%;
+  border: 0;
 }
 #product-container *:not(button) {
   background-color: inherit;

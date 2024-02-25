@@ -1,6 +1,6 @@
 <template>
   <div v-if="products.length > 0">
-    <div v-for="item in products" :key="item.product.id" class="product-container">
+    <div v-for="item in products" :key="item.product.id" class="products-container">
       <ProductListItem
         :product="item.product"
         :amount="item.amount"
@@ -24,12 +24,13 @@ export default {
 };
 </script>
 <style scoped>
-.product-container {
+.products-container {
   align-content: "center";
   border-bottom: 1px solid #ddd;
   display: flex;
   padding: 16px;
   width: 100%;
+  border: 0;
   background-color: var(--medium-dark-blue);
 }
 #no-products-text * {

@@ -17,6 +17,7 @@ import NavBar from "./components/NavBar.vue";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
+  --extra-dark-blue: rgb(11, 4, 66);
   --dark-blue: rgb(1, 38, 105);
   --medium-dark-blue: rgb(62, 119, 168);
   --medium-blue: rgb(109, 166, 216);
@@ -40,7 +41,7 @@ body {
 }
 
 button {
-  background-color: black;
+  background-color: var(--extra-dark-blue);
   color: white;
   cursor: pointer;
   font-size: 16px;
@@ -50,8 +51,12 @@ button {
   padding: 16px;
 }
 
+h1 {
+  color: var(--extra-dark-blue);
+}
+
 .scaling-squares-spinner {
-  margin: auto;
+  margin: 15% auto;
   animation-duration: 1250;
   size: 65;
 }
