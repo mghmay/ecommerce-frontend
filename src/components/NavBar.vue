@@ -10,10 +10,13 @@
 </template>
 <script>
 export default {
-  name: 'NavBar'
-}
+  name: "NavBar",
+};
 </script>
 <style scoped>
+h1 {
+  color: var(--dark-blue);
+}
 #nav-bar {
   height: 75px;
   width: 100%;

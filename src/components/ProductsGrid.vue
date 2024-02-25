@@ -4,18 +4,19 @@
   </div>
 </template>
 <script>
-import ProductsGridItem from './ProductsGridItem.vue'
+import ProductsGridItem from "./ProductsGridItem.vue";
 export default {
-  name: 'ProductsGrid',
-  props: ['products'],
-  components: { ProductsGridItem }
-}
+  name: "ProductsGrid",
+  props: ["products"],
+  components: { ProductsGridItem },
+};
 </script>
 <style scoped>
 .grid-wrap {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: stretch;
   margin-top: 16px;
 }
 </style>

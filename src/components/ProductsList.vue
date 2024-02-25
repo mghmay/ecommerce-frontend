@@ -10,28 +10,31 @@
     </div>
   </div>
   <div id="no-products-text" v-else>
-    <h4>{{ noProductsText ? noProductsText : 'Nothing to see here' }}</h4>
+    <h4>{{ noProductsText ? noProductsText : "Nothing to see here" }}</h4>
   </div>
 </template>
 <script>
-import ProductListItem from '@/components/ProductsListItem.vue'
+import ProductListItem from "@/components/ProductsListItem.vue";
 export default {
-  name: 'ProductsList',
-  props: ['products', 'noProductsText'],
+  name: "ProductsList",
+  props: ["products", "noProductsText"],
   components: {
-    ProductListItem
-  }
-}
+    ProductListItem,
+  },
+};
 </script>
 <style scoped>
 .product-container {
-  align-content: 'center';
+  align-content: "center";
   border-bottom: 1px solid #ddd;
   display: flex;
   padding: 16px;
   width: 100%;
+  background-color: var(--medium-dark-blue);
 }
-#no-products-text {
+#no-products-text * {
+  background-color: var(--medium-dark-blue);
   text-align: center;
+  padding: 80px;
 }
 </style>

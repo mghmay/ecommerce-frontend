@@ -11,9 +11,9 @@
 </template>
 <script>
 export default {
-  name: 'ProductsGridItem',
-  props: ['product']
-}
+  name: "ProductsGridItem",
+  props: ["product"],
+};
 </script>
 <style scoped>
 .grid-item {
@@ -21,14 +21,17 @@ export default {
   flex-direction: column;
   margin: 2%;
   position: relative;
-  width: 24%;
+  width: 20%;
 }
 
 .product {
   background-color: var(--light-blue);
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   align-items: center;
   box-shadow: 0px 2px 5px #888;
+  height: 100%;
 }
 
 .product:hover {
@@ -38,14 +41,14 @@ export default {
 
 .product-name {
   background-color: inherit;
-  margin-bottom: 0;
 }
 .product-price {
   background-color: inherit;
-  margin-bottom: 0;
+  margin-top: auto;
 }
 
 .link {
+  display: flex;
   text-decoration: none;
   color: inherit;
 }
@@ -56,6 +59,7 @@ img {
 }
 
 a {
+  height: 100%;
   width: 100%;
 }
 

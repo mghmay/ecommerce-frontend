@@ -1,57 +1,80 @@
 <template>
   <div id="page-wrap">
     <h1>Shopping Cart</h1>
-    <ProductsList
-      :products="cartItems"
-      v-on:remove-from-cart="removeFromCart($event)"
-      v-on:add-to-cart="addToCart($event)"
-      noProductsText="You haven't added any items to your cart yet"
-    />
-    <h3 id="total-price">Total: ${{ totalPrice }}</h3>
-    <button id="checkout-button">Proceed to Checkout</button>
+    <div v-if="loading">
+      <scaling-squares-spinner />
+    </div>
+    <div v-else>
+      <ProductsList
+        :products="cartItems"
+        v-on:remove-from-cart="removeFromCart($event)"
+        v-on:add-to-cart="addToCart($event)"
+        noProductsText="You haven't added any items to your cart yet"
+      />
+      <h3 id="total-price">Total: ${{ totalPrice }}</h3>
+      <button id="checkout-button">Proceed to Checkout</button>
+    </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
-import ProductsList from '@/components/ProductsList.vue'
+import axios from "axios";
+import ProductsList from "@/components/ProductsList.vue";
+import { ScalingSquaresSpinner } from "epic-spinners";
 export default {
-  name: 'CartPage',
+  name: "CartPage",
   data() {
     return {
-      cartItems: []
-    }
+      cartItems: [],
+      loading: true,
+    };
   },
   computed: {
     totalPrice() {
-      return this.cartItems.reduce((sum, item) => sum + Number(item.product.price) * item.amount, 0)
-    }
+      return this.cartItems
+        .reduce((sum, item) => sum + Number(item.product.price) * item.amount, 0)
+        .toFixed(2);
+    },
   },
   methods: {
     async removeFromCart(productId) {
-      const result = await axios.delete(`/api/users/12345/cart/${productId}`)
-      this.cartItems = result.data
+      this.loading = true;
+      const result = await axios.delete(`/api/users/12345/cart/${productId}`);
+      this.cartItems = result.data;
+      this.loading = false;
     },
     async addToCart(productId) {
-      const result = await axios.post(`/api/users/12345/cart`, { productId })
-      this.cartItems = result.data
-    }
+      this.loading = true;
+      const result = await axios.post(`/api/users/12345/cart`, { productId });
+      this.cartItems = result.data;
+      this.loading = false;
+    },
   },
   async created() {
-    const result = await axios.get('/api/users/12345/cart')
-    const cartItems = result.data
-    this.cartItems = cartItems
+    const result = await axios.get("/api/users/12345/cart");
+    const cartItems = result.data;
+    this.cartItems = cartItems;
+    this.loading = false;
   },
   components: {
-    ProductsList
-  }
-}
+    ProductsList,
+    ScalingSquaresSpinner,
+  },
+};
 </script>
 
 <style scoped>
+#page-wrap {
+  background-color: var(--medium-blue);
+  min-height: fit-content;
+  padding: 0 0 50px 0;
+}
+
+#page-wrap *:not(button) {
+  background-color: inherit;
+}
 h1 {
   border-bottom: 1px solid black;
-  margin: 0;
-  margin-top: 16px;
+  margin: 16px 0;
   padding: 16px;
 }
 
@@ -61,6 +84,8 @@ h1 {
 }
 
 #checkout-button {
-  width: 100%;
+  display: block;
+  margin: auto;
+  width: 80%;
 }
 </style>
