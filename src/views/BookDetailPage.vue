@@ -3,8 +3,8 @@
     <scaling-squares-spinner />
   </div>
   <div v-else>
-    <div id="page-wrap" v-if="product">
-      <ProductDetails :product="product" />
+    <div id="page-wrap" v-if="book">
+      <ProductDetails :product="book" />
     </div>
     <NotFoundPage v-else />
   </div>
@@ -18,7 +18,7 @@ export default {
   name: "BookDetailPage",
   data() {
     return {
-      product: {},
+      book: {},
       showSuccessMessage: false,
       loading: true,
     };
@@ -34,7 +34,7 @@ export default {
     } finally {
       this.loading = false;
     }
-    this.product = book;
+    this.book = book;
   },
 };
 </script>

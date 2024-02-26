@@ -4,7 +4,7 @@
     <div class="details-wrap">
       <h3>{{ product.name }}</h3>
       <span>x{{ amount }}</span>
-      <p>${{ totalPrice }}</p>
+      <p>£{{ totalPrice }}</p>
     </div>
     <button class="add-button" @click="$emit('add-to-cart', product.id)">Add</button>
     <button class="remove-button" @click="$emit('remove-from-cart', product.id)">

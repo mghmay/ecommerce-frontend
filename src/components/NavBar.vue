@@ -3,14 +3,49 @@
     <router-link to="/books" id="books-link">
       <h1>Foobar Bookshop</h1>
     </router-link>
+    <!-- <router-link :to="{ name: '/genres', params: { genre } }" id="genre-link">
+      <span>Genres</span>
+    </router-link> -->
+    <AppDropdown :iterater="genres" class="">
+      <template v-slot:toggler>
+        <button class="nav-link-button">Genres</button>
+      </template>
+      <AppDropdownContent>
+        <AppDropdownItem
+          v-for="genre in genres"
+          :key="genre"
+          :link="`/genres/${genre}`"
+          >{{ genre }}</AppDropdownItem
+        >
+      </AppDropdownContent>
+    </AppDropdown>
     <router-link to="/cart" id="cart-link">
       <button>Shopping Cart</button>
     </router-link>
   </nav>
 </template>
 <script>
+import AppDropdown from "../components/AppDropdown.vue";
+import AppDropdownContent from "../components/AppDropdownContent.vue";
+import AppDropdownItem from "../components/AppDropdownItem.vue";
+import axios from "axios";
 export default {
   name: "NavBar",
+  data() {
+    return {
+      genres: [],
+    };
+  },
+  components: {
+    AppDropdown,
+    AppDropdownContent,
+    AppDropdownItem,
+  },
+  async created() {
+    const result = await axios.get(`/api/genres`);
+    const genres = result.data;
+    this.genres = genres;
+  },
 };
 </script>
 <style scoped>
@@ -18,6 +53,15 @@ export default {
   height: 75px;
   width: 100%;
   background-color: var(--medium-blue);
+  display: flex;
+  justify-content: end;
+}
+
+.nav-link-button {
+  background-color: var(--medium-dark-blue);
+  height: 100%;
+  border-radius: 0;
+  margin-right: 5px;
 }
 
 #nav-bar *:not(button) {
@@ -40,8 +84,6 @@ export default {
 }
 
 #cart-link {
-  position: absolute;
-  right: 16px;
-  top: 16px;
+  margin: auto 5px;
 }
 </style>

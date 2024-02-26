@@ -6,7 +6,7 @@
     <div id="product-details">
       <h1 id="title">{{ product.name }}</h1>
       <h3 id="author">Author: {{ product.author }}</h3>
-      <h3 id="price">${{ product.price }}</h3>
+      <h3 id="price">£{{ product.price }}</h3>
       <p id="rating">Average rating: {{ product.averageRating }}</p>
       <button id="add-to-cart" v-on:click="addToCart" v-if="!showSuccessMessage">
         Add to cart

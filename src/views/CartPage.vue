@@ -11,7 +11,7 @@
         v-on:add-to-cart="addToCart($event)"
         nobooksText="You haven't added any items to your cart yet"
       />
-      <h3 id="total-price">Total: ${{ totalPrice }}</h3>
+      <h3 id="total-price">Total: £{{ totalPrice }}</h3>
       <button id="checkout-button">Proceed to Checkout</button>
     </div>
   </div>

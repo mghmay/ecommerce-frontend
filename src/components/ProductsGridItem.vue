@@ -4,7 +4,7 @@
       <div class="product">
         <img :src="product.imageUrl" />
         <h4 class="product-name">{{ product.name }}</h4>
-        <p class="product-price">${{ product.price }}</p>
+        <p class="product-price">£{{ product.price }}</p>
       </div>
     </router-link>
   </div>
