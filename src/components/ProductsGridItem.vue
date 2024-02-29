@@ -19,7 +19,7 @@ export default {
 .grid-item {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 300px;
   padding: 15px 10px;
 }
 

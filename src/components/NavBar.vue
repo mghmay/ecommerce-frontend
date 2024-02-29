@@ -1,11 +1,11 @@
 <template>
   <nav id="nav-bar">
-    <router-link to="/books" id="books-link">
+    <router-link to="/books" id="books-link" @click="clearSearchVal">
       <h1>Foobar Bookshop</h1>
     </router-link>
-    <!-- <router-link :to="{ name: '/genres', params: { genre } }" id="genre-link">
-      <span>Genres</span>
-    </router-link> -->
+    <div class="search-bar-wrapper">
+      <SearchBar v-model="searchVal" @keyup.enter="submit(searchVal)" />
+    </div>
     <AppDropdown :iterater="genres" class="">
       <template v-slot:toggler>
         <button class="nav-link-button">Genres</button>
@@ -28,23 +28,41 @@
 import AppDropdown from "../components/AppDropdown.vue";
 import AppDropdownContent from "../components/AppDropdownContent.vue";
 import AppDropdownItem from "../components/AppDropdownItem.vue";
+import SearchBar from "./SearchBar.vue";
 import axios from "axios";
 export default {
   name: "NavBar",
   data() {
     return {
       genres: [],
+      searchVal: "",
     };
   },
   components: {
     AppDropdown,
     AppDropdownContent,
     AppDropdownItem,
+    SearchBar,
+  },
+  watch: {
+    searchVal(newValue, oldValue) {
+      if (oldValue && !newValue) {
+        this.clearSearchVal();
+      }
+    },
   },
   async created() {
     const result = await axios.get(`/api/genres`);
     const genres = result.data;
     this.genres = genres;
+  },
+  methods: {
+    submit(searchVal) {
+      this.$router.push({ path: "/", query: { search: searchVal } });
+    },
+    clearSearchVal() {
+      this.$router.push({ path: "/" });
+    },
   },
 };
 </script>
@@ -55,6 +73,9 @@ export default {
   background-color: var(--medium-blue);
   display: flex;
   justify-content: end;
+}
+.search-bar-wrapper {
+  margin: auto 10px;
 }
 
 .nav-link-button {

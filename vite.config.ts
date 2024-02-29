@@ -13,8 +13,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:8000',
-      '/images': 'http://localhost:8000'
+      '/api': process.env.PROXY_API || 'http://localhost:8000/',
+      '/images': process.env.PROXY_API || 'http://localhost:8000/'
     }
   }
 })

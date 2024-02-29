@@ -3,15 +3,19 @@
     <scaling-squares-spinner />
   </div>
   <div v-else>
-    <div id="page-wrap">
-      <ProductsGrid :products="books" />
+    <div v-if="filteredBooks.length > 0">
+      <div id="page-wrap">
+        <ProductsGrid :products="filteredBooks" />
+      </div>
     </div>
+    <div v-else><NotFoundPage title="No books to be found!" /></div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import ProductsGrid from "@/components/ProductsGrid.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
+import NotFoundPage from "./NotFoundPage.vue";
 
 export default {
   name: "BooksPage",
@@ -19,17 +23,49 @@ export default {
     return {
       books: [],
       loading: true,
+      searchQuery: "",
     };
+  },
+  computed: {
+    filteredBooks() {
+      if (!this.searchQuery) {
+        return this.books;
+      }
+      return this.books.filter((book) =>
+        book.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+  },
+  watch: {
+    $route(to, from) {
+      if (to.query.search !== from.query.search) {
+        this.searchQuery = to.query.search || "";
+      }
+    },
   },
   components: {
     ProductsGrid,
     ScalingSquaresSpinner,
+    NotFoundPage,
   },
   async created() {
-    const result = await axios.get("/api/books");
-    const books = result.data;
-    this.books = books;
-    this.loading = false;
+    await this.fetchBooks();
+  },
+  methods: {
+    async fetchBooks() {
+      try {
+        const { data } = await axios.get(`/api/books`);
+        this.books = data;
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    filterBooks(name) {
+      return (this.books = this.filter((book) => book.name.includes(name)));
+    },
   },
 };
 </script>
