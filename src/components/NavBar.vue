@@ -29,7 +29,7 @@ import AppDropdown from "../components/AppDropdown.vue";
 import AppDropdownContent from "../components/AppDropdownContent.vue";
 import AppDropdownItem from "../components/AppDropdownItem.vue";
 import SearchBar from "./SearchBar.vue";
-import axios from "axios";
+import { get } from "@/api";
 export default {
   name: "NavBar",
   data() {
@@ -52,7 +52,7 @@ export default {
     },
   },
   async created() {
-    const result = await axios.get(`/api/genres`);
+    const result = await get(`/api/genres`);
     const genres = result.data;
     this.genres = genres;
   },

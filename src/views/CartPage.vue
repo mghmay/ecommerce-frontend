@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { get, del, post } from "@/api";
 import ProductsList from "@/components/ProductsList.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
 
@@ -45,19 +45,19 @@ export default {
   methods: {
     async removeFromCart(bookId) {
       this.loading = true;
-      const result = await axios.delete(`/api/users/12345/cart/${bookId}`);
+      const result = await del(`/api/users/12345/cart/${bookId}`);
       this.cartItems = updateCart(result);
       this.loading = false;
     },
     async addToCart(bookId) {
       this.loading = true;
-      const result = await axios.post(`/api/users/12345/cart`, { bookId });
+      const result = await post(`/api/users/12345/cart`, { bookId });
       this.cartItems = updateCart(result);
       this.loading = false;
     },
   },
   async created() {
-    const result = await axios.get("/api/users/12345/cart");
+    const result = await get("/api/users/12345/cart");
     this.cartItems = updateCart(result);
     this.loading = false;
   },

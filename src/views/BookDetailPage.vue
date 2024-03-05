@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { get } from "@/api";
 import NotFoundPage from "./NotFoundPage.vue";
 import ProductDetails from "../components/ProductDetails.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
@@ -27,7 +27,7 @@ export default {
   async created() {
     let book = undefined;
     try {
-      const result = await axios.get(`/api/books/${this.$route.params.id}`);
+      const result = await get(`/api/books/${this.$route.params.id}`);
       book = result.data;
     } catch (e) {
       console.error(`Error: ${e.message}`);

@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { get } from "@/api";
 import ProductsGrid from "@/components/ProductsGrid.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
 
@@ -39,7 +39,7 @@ export default {
     async fetchBooks() {
       const genre = this.$route.params.genre;
 
-      const result = await axios.get(`/api/books/genre/${genre}`);
+      const result = await get(`/api/books/genre/${genre}`);
 
       const books = result.data;
       this.books = books;

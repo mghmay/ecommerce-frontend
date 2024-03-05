@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { get } from "@/api";
 import ProductsGrid from "@/components/ProductsGrid.vue";
 import { ScalingSquaresSpinner } from "epic-spinners";
 import NotFoundPage from "./NotFoundPage.vue";
@@ -54,7 +54,7 @@ export default {
   methods: {
     async fetchBooks() {
       try {
-        const { data } = await axios.get(`/api/books`);
+        const { data } = await get(`/api/books`);
         this.books = data;
       } catch (error) {
         console.error("Error fetching books:", error);

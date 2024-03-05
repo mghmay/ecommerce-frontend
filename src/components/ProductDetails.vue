@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { post } from "@/api";
 export default {
   name: "ProductDetails",
   data() {
@@ -33,7 +33,7 @@ export default {
   props: ["product"],
   methods: {
     async addToCart() {
-      await axios.post("/api/users/12345/cart", { bookId: this.$route.params.id });
+      await post("/api/users/12345/cart", { bookId: this.$route.params.id });
       this.showSuccessMessage = true;
       setTimeout(() => (this.showSuccessMessage = false), 1000);
     },
