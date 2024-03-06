@@ -1,6 +1,6 @@
 # ecommerce-frontend
 
-You can see the website live here: https://ecommerce-frontend-o6kk.onrender.com/books
+You can see the website live here: https://ecommerce-frontend-o6kk.onrender.com/books (the backend cold starts so it could take a minute to load!)
 
 ## Recommended IDE Setup
 
