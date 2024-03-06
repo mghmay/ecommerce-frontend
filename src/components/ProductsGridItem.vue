@@ -2,7 +2,7 @@
   <div class="grid-item">
     <router-link class="link" :to="`/books/${product.id}`">
       <div class="product">
-        <img :src="product.imageUrl" />
+        <img :src="backend_url ? backend_url + product.imageUrl : product.imageUrl" />
         <h4 class="product-name">{{ product.name }}</h4>
         <p class="product-price">£{{ product.price }}</p>
       </div>
@@ -10,9 +10,15 @@
   </div>
 </template>
 <script>
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 export default {
   name: "ProductsGridItem",
   props: ["product"],
+  data() {
+    return {
+      backend_url,
+    };
+  },
 };
 </script>
 <style scoped>
