@@ -9,7 +9,9 @@ const headers = {
 }
 
 export async function get(path: string) {
-  return instance.get(path, { headers })
+  const toReturn = await instance.get(path, { headers })
+  console.log(toReturn)
+  return toReturn
 }
 
 export async function post(path: string, body: any) {
