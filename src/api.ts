@@ -1,17 +1,21 @@
 import axios from 'axios'
 
+const instance = axios.create({
+  baseURL: import.meta.env.BACKEND_URL
+})
+
 const headers = {
   Authorization: import.meta.env.VITE_SECRET_KEY
 }
 
 export async function get(path: string) {
-  return axios.get(path, { headers })
+  return instance.get(path, { headers })
 }
 
 export async function post(path: string, body: any) {
-  return axios.post(path, body, { headers })
+  return instance.post(path, body, { headers })
 }
 
 export async function del(path: string) {
-  return axios.delete(path, { headers })
+  return instance.delete(path, { headers })
 }
