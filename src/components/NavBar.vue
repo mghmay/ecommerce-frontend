@@ -3,25 +3,27 @@
     <router-link to="/books" id="books-link" @click="clearSearchVal">
       <h1>Foobar Bookshop</h1>
     </router-link>
-    <div class="search-bar-wrapper">
-      <SearchBar v-model="searchVal" @keyup.enter="submit(searchVal)" />
+    <div class="content">
+      <div class="search-bar-wrapper">
+        <SearchBar v-model="searchVal" @keyup.enter="submit(searchVal)" />
+      </div>
+      <AppDropdown :iterater="genres" class="dropdown">
+        <template v-slot:toggler>
+          <button class="nav-link-button">Genres</button>
+        </template>
+        <AppDropdownContent>
+          <AppDropdownItem
+            v-for="genre in genres"
+            :key="genre"
+            :link="`/genres/${genre}`"
+            >{{ genre }}</AppDropdownItem
+          >
+        </AppDropdownContent>
+      </AppDropdown>
+      <router-link to="/cart" id="cart-link">
+        <button>Shopping Cart</button>
+      </router-link>
     </div>
-    <AppDropdown :iterater="genres" class="">
-      <template v-slot:toggler>
-        <button class="nav-link-button">Genres</button>
-      </template>
-      <AppDropdownContent>
-        <AppDropdownItem
-          v-for="genre in genres"
-          :key="genre"
-          :link="`/genres/${genre}`"
-          >{{ genre }}</AppDropdownItem
-        >
-      </AppDropdownContent>
-    </AppDropdown>
-    <router-link to="/cart" id="cart-link">
-      <button>Shopping Cart</button>
-    </router-link>
   </nav>
 </template>
 <script>
@@ -72,7 +74,13 @@ export default {
   width: 100%;
   background-color: var(--medium-blue);
   display: flex;
+  flex-wrap: wrap;
   justify-content: end;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
 }
 .search-bar-wrapper {
   margin: auto 10px;
@@ -106,5 +114,31 @@ export default {
 
 #cart-link {
   margin: auto 5px;
+}
+
+@media only screen and (max-width: 870px) {
+  .content {
+    height: 50px;
+    margin-top: 60px;
+  }
+  #books-link {
+    display: block;
+    width: 100%;
+  }
+
+  #nav-bar {
+    height: 120px;
+  }
+  .nav-link-button {
+    height: fit-content;
+    margin: auto;
+  }
+  .search-bar-wrapper {
+    height: fit-content;
+    margin: auto 5px;
+  }
+  .cart-link {
+    margin: auto;
+  }
 }
 </style>
