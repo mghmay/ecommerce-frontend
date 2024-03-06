@@ -1,6 +1,6 @@
 # ecommerce-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+You can see the website live here: https://ecommerce-frontend-o6kk.onrender.com/books
 
 ## Recommended IDE Setup
 
