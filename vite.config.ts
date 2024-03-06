@@ -7,7 +7,6 @@ import 'dotenv/config'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: 'https://ecommerce-frontend-o6kk.onrender.com',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
