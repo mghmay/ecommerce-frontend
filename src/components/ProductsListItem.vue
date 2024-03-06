@@ -1,6 +1,10 @@
 <template>
   <div id="product-container">
-    <img :src="product.imageUrl" alt="" class="product-image" />
+    <img
+      :src="backend_url ? backend_url + product.imageUrl : product.imageUr"
+      alt=""
+      class="product-image"
+    />
     <div class="details-wrap">
       <h3>{{ product.name }}</h3>
       <span>x{{ amount }}</span>
@@ -13,6 +17,7 @@
   </div>
 </template>
 <script>
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 export default {
   name: "ProductsListItem",
   props: ["product", "amount"],
@@ -20,6 +25,11 @@ export default {
     totalPrice() {
       return Number(this.amount) * Number(this.product.price);
     },
+  },
+  data() {
+    return {
+      backend_url,
+    };
   },
 };
 </script>

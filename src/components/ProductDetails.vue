@@ -1,7 +1,7 @@
 <template>
   <div id="product-wrap">
     <div id="img-wrap">
-      <img :src="product.imageUrl" />
+      <img :src="backend_url ? backend_url + product.imageUrl : product.imageUr" />
     </div>
     <div id="product-details">
       <h1 id="title">{{ product.name }}</h1>
@@ -23,11 +23,13 @@
 </template>
 <script>
 import { post } from "@/api";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 export default {
   name: "ProductDetails",
   data() {
     return {
       showSuccessMessage: false,
+      backend_url,
     };
   },
   props: ["product"],
