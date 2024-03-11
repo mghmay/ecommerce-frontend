@@ -23,11 +23,12 @@ export default {
     return {
       books: [],
       loading: true,
-      searchQuery: "",
+      searchQuery: this.$route.query.search,
     };
   },
   computed: {
     filteredBooks() {
+      console.log(this.searchQuery);
       if (!this.searchQuery) {
         return this.books;
       }

@@ -1,7 +1,7 @@
 <template>
   <div id="product-wrap">
     <div id="img-wrap">
-      <img :src="backend_url ? backend_url + product.imageUrl : product.imageUr" />
+      <img :src="backend_url ? backend_url + product.imageUrl : product.imageUrl" />
     </div>
     <div id="product-details">
       <h1 id="title">{{ product.name }}</h1>

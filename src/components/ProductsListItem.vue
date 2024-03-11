@@ -1,7 +1,7 @@
 <template>
   <div id="product-container">
     <img
-      :src="backend_url ? backend_url + product.imageUrl : product.imageUr"
+      :src="backend_url ? backend_url + product.imageUrl : product.imageUrl"
       alt=""
       class="product-image"
     />
