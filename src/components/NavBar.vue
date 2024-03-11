@@ -1,37 +1,55 @@
 <template>
-  <nav id="nav-bar">
-    <router-link to="/books" id="books-link" @click="clearSearchVal">
-      <h1>Foobar Bookshop</h1>
-    </router-link>
-    <div class="content">
-      <div class="search-bar-wrapper">
-        <SearchBar v-model="searchVal" @keyup.enter="submit(searchVal)" />
-      </div>
-      <AppDropdown :iterater="genres" class="dropdown">
-        <template v-slot:toggler>
-          <button class="nav-link-button">Genres</button>
-        </template>
-        <AppDropdownContent>
-          <AppDropdownItem
-            v-for="genre in genres"
-            :key="genre"
-            :link="`/genres/${genre}`"
-            >{{ genre }}</AppDropdownItem
-          >
-        </AppDropdownContent>
-      </AppDropdown>
-      <router-link to="/cart" id="cart-link">
-        <button>Shopping Cart</button>
+  <CNavbar expand="lg" class="medium-blue-bg">
+    <CContainer fluid class="inherit-bg">
+      <router-link to="/books" id="books-link" @click="clearSearchVal" class="inherit-bg">
+        <h1 class="inherit-bg">Foobar Bookshop</h1>
       </router-link>
-    </div>
-  </nav>
+      <CNavbarNav class="inherit-bg">
+        <CForm @submit="submit" id="search-area" class="d-flex inherit-bg">
+          <CFormInput
+            type="search"
+            class="me-2"
+            placeholder="Search"
+            v-model="searchVal"
+          />
+          <CButton type="submit" color="success" variant="outline" class="dark-blue-bg"
+            >Search</CButton
+          >
+        </CForm>
+        <CDropdown variant="nav-item" class="v-dark-blue-bg" id="dropdown">
+          <CDropdownToggle color="white">Genres</CDropdownToggle>
+          <CDropdownMenu>
+            <router-link
+              class="dropdown-item"
+              v-for="genre in genres"
+              :key="genre"
+              :to="`/genres/${genre}`"
+              >{{ genre }}</router-link
+            >
+          </CDropdownMenu>
+        </CDropdown>
+        <router-link to="/cart" class="inherit-bg">
+          <button class="main-button">Shopping Cart</button>
+        </router-link>
+      </CNavbarNav>
+    </CContainer>
+  </CNavbar>
 </template>
 <script>
-import AppDropdown from "../components/AppDropdown.vue";
-import AppDropdownContent from "../components/AppDropdownContent.vue";
-import AppDropdownItem from "../components/AppDropdownItem.vue";
-import SearchBar from "./SearchBar.vue";
+import {
+  CContainer,
+  CNavbarNav,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownMenu,
+  CNavbar,
+  CFormInput,
+  CButton,
+  CForm,
+} from "@coreui/vue";
 import { get } from "@/api";
+import "@coreui/coreui/dist/css/coreui.min.css";
+
 export default {
   name: "NavBar",
   data() {
@@ -41,10 +59,15 @@ export default {
     };
   },
   components: {
-    AppDropdown,
-    AppDropdownContent,
-    AppDropdownItem,
-    SearchBar,
+    CDropdown,
+    CDropdownToggle,
+    CDropdownMenu,
+    CContainer,
+    CNavbarNav,
+    CNavbar,
+    CFormInput,
+    CButton,
+    CForm,
   },
   watch: {
     searchVal(newValue, oldValue) {
@@ -59,8 +82,9 @@ export default {
     this.genres = genres;
   },
   methods: {
-    submit(searchVal) {
-      this.$router.push({ path: "/", query: { search: searchVal } });
+    submit(e) {
+      e.preventDefault();
+      this.$router.push({ path: "/", query: { search: this.searchVal } });
     },
     clearSearchVal() {
       this.$router.push({ path: "/" });
@@ -69,76 +93,15 @@ export default {
 };
 </script>
 <style scoped>
-#nav-bar {
-  height: 75px;
-  width: 100%;
-  background-color: var(--medium-blue);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
+#search-area {
+  padding: 6px;
 }
 
-.content {
-  display: flex;
-  flex-direction: row;
-}
-.search-bar-wrapper {
-  margin: auto 10px;
+#dropdown {
+  margin: auto 15px;
 }
 
-.nav-link-button {
-  background-color: var(--medium-dark-blue);
-  height: 100%;
-  border-radius: 0;
-  margin-right: 5px;
-}
-
-#nav-bar *:not(button) {
-  background-color: inherit;
-}
-
-#books-link {
-  text-align: center;
-  display: block;
-  color: black;
-  font-size: 22px;
-  left: 32px;
-  position: absolute;
-  top: 16px;
-  text-decoration: none;
-}
-
-#books-link h1 {
-  margin: 0;
-}
-
-#cart-link {
-  margin: auto 5px;
-}
-
-@media only screen and (max-width: 870px) {
-  .content {
-    height: 50px;
-    margin-top: 60px;
-  }
-  #books-link {
-    display: block;
-    width: 100%;
-  }
-
-  #nav-bar {
-    height: 120px;
-  }
-  .nav-link-button {
-    height: fit-content;
-    margin: auto;
-  }
-  .search-bar-wrapper {
-    height: fit-content;
-    margin: auto 5px;
-  }
-  .cart-link {
-    margin: auto;
-  }
+.nav-link {
+  color: white;
 }
 </style>

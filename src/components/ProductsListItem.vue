@@ -10,8 +10,13 @@
       <span>x{{ amount }}</span>
       <p>£{{ totalPrice }}</p>
     </div>
-    <button class="add-button" @click="$emit('add-to-cart', product.id)">Add</button>
-    <button class="remove-button" @click="$emit('remove-from-cart', product.id)">
+    <button class="add-button main-button" @click="$emit('add-to-cart', product.id)">
+      Add
+    </button>
+    <button
+      class="remove-button main-button"
+      @click="$emit('remove-from-cart', product.id)"
+    >
       Remove
     </button>
   </div>

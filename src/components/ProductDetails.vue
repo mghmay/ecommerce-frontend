@@ -8,10 +8,15 @@
       <h3 id="author">Author: {{ product.author }}</h3>
       <h3 id="price">£{{ product.price }}</h3>
       <p id="rating">Average rating: {{ product.averageRating }}</p>
-      <button id="add-to-cart" v-on:click="addToCart" v-if="!showSuccessMessage">
+      <button
+        id="add-to-cart"
+        class="main-button"
+        v-on:click="addToCart"
+        v-if="!showSuccessMessage"
+      >
         Add to cart
       </button>
-      <button id="add-to-cart" class="green-button" v-else>
+      <button id="add-to-cart" class="main-button green-button" v-else>
         Successfully added to cart
       </button>
       <div id="description">

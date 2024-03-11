@@ -34,13 +34,38 @@ body {
   font-family: Montserrat, Arial;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.extra-dark-blue-bg {
+  background-color: var(--extra-dark-blue);
+}
+.dark-blue-bg {
+  background-color: var(--dark-blue);
+}
+.medium-dark-blue-bg {
+  background-color: var(--medium-dark-blue);
+}
+.medium-blue-bg {
+  background-color: var(--medium-blue);
+}
+.light-blue-bg {
+  background-color: var(--light-blue);
+}
+
+.inherit-bg {
+  background-color: inherit;
+}
+
 #page-wrap {
   margin: auto;
   max-width: 1200px;
   min-height: 100vh;
 }
 
-button {
+.main-button {
   background-color: var(--extra-dark-blue);
   color: white;
   cursor: pointer;
