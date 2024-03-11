@@ -28,7 +28,6 @@ export default {
   },
   computed: {
     filteredBooks() {
-      console.log(this.searchQuery);
       if (!this.searchQuery) {
         return this.books;
       }
